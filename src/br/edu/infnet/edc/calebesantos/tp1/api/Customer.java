@@ -25,6 +25,10 @@ public class Customer {
 	public String statement() {
 		return new TextStatement().generate(this);
 	}
+	
+	public String htmlStatement() {
+		return new HtmlStatement().generate(this);
+	}
 
 	public int getFrequentRenterPoints() {
 		return getRentalsStream().mapToInt(r -> r.calculateFrequentRenterPoints()).sum();
