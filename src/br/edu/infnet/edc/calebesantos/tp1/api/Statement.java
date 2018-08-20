@@ -16,14 +16,11 @@ public class Statement {
 		while (rentals.hasMoreElements()) {
 			Rental each = (Rental) rentals.nextElement();
 
-			// add frequent renter points
 			frequentRenterPoints += each.calculateFrequentRenterPoints();
 
-			// show figures for this rental
 			result += generateFigureForRental(each);
 		}
 
-		// add footer lines
 		result += generateFooter(totalAmount, frequentRenterPoints);
 
 		return result;
