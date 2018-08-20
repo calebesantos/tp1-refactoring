@@ -23,7 +23,7 @@ public class Customer {
 	}
 	
 	public String statement() {
-		return new Statement().generate(this);
+		return new TextStatement().generate(this);
 	}
 
 	public int getFrequentRenterPoints() {
