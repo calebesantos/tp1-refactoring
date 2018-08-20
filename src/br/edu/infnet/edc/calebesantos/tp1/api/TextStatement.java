@@ -11,7 +11,10 @@ public class TextStatement extends Statement {
 		return "\t" + each.getMovie().getTitle() + "\t" + each.calculateAmount() + "\n";
 	}
 
-	protected String generateFooter(double totalAmount, int frequentRenterPoints) {
+	protected String generateFooter(Customer customer) {
+		double totalAmount = customer.getTotalAmount();
+		int frequentRenterPoints = customer.getFrequentRenterPoints();
+
 		return "Amount owed is " + String.valueOf(totalAmount) + "\n" + "You earned "
 				+ String.valueOf(frequentRenterPoints) + " frequent renter points";
 	}

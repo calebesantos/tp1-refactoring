@@ -11,8 +11,11 @@ public class HtmlStatement extends Statement {
 		return "\t" + each.getMovie().getTitle() + "\t" + each.calculateAmount() + "<br>\n";
 	}
 
-	protected String generateFooter(double totalAmount, int frequentRenterPoints) {
-		return "<p>Amount owed is <em>" + String.valueOf(totalAmount) + "</em><p>\n"
-				+ "You earned <em>" + String.valueOf(frequentRenterPoints) + "</em> frequent renter points<p>";
+	protected String generateFooter(Customer customer) {
+		double totalAmount = customer.getTotalAmount();
+		int frequentRenterPoints = customer.getFrequentRenterPoints();
+
+		return "<p>Amount owed is <em>" + String.valueOf(totalAmount) + "</em><p>\n" + "You earned <em>"
+				+ String.valueOf(frequentRenterPoints) + "</em> frequent renter points<p>";
 	}
 }
