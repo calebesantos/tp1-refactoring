@@ -21,53 +21,24 @@ public class Customer {
 	public String getName() {
 		return _name;
 	}
-
+	
 	public String statement() {
-		double totalAmount = getTotalAmount();
-		int frequentRenterPoints = getFrequentRenterPoints();
-		Enumeration<Rental> rentals = _rentals.elements();
-
-		String result = generateHeader();
-
-		while (rentals.hasMoreElements()) {
-			Rental each = (Rental) rentals.nextElement();
-
-			// add frequent renter points
-			frequentRenterPoints += each.calculateFrequentRenterPoints();
-
-			// show figures for this rental
-			result = generateFigureForRental(each);
-		}
-
-		// add footer lines
-		result = generateFooter(totalAmount, frequentRenterPoints);
-
-		return result;
+		return new Statement().generate(this);
 	}
 
-	private int getFrequentRenterPoints() {
+	public int getFrequentRenterPoints() {
 		return getRentalsStream().mapToInt(r -> r.calculateFrequentRenterPoints()).sum();
 	}
 
-	private double getTotalAmount() {
+	public double getTotalAmount() {
 		return getRentalsStream().mapToDouble(r -> r.calculateAmount()).sum();
+	}
+	
+	public Enumeration<Rental> getEnumerationRentals() {
+		return _rentals.elements();
 	}
 
 	private Stream<Rental> getRentalsStream() {
 		return _rentals.stream();
-	}
-
-	private String generateHeader() {
-		String result = "Rental Record for " + getName() + "\n";
-		return result;
-	}
-
-	private String generateFigureForRental(Rental each) {
-		return "\t" + each.getMovie().getTitle() + "\t" + each.calculateAmount() + "\n";
-	}
-
-	private String generateFooter(double totalAmount, int frequentRenterPoints) {
-		return "Amount owed is " + String.valueOf(totalAmount) + "\n" + "You earned "
-				+ String.valueOf(frequentRenterPoints) + " frequent renter points";
 	}
 }
