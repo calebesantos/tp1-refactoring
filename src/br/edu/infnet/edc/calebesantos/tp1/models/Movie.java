@@ -41,7 +41,7 @@ public class Movie {
 	}
 
 	public int calculateFrequentRenterPoints(int daysRented) {
-		return (getPriceCode() == Movie.NEW_RELEASE) && daysRented > 1 ? 2 : 1;
+		return _price.calculateFrequentRenterPoints(daysRented);
 	}
 
 	public double calculateAmount(int daysRented) {
